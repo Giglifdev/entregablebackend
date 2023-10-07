@@ -1,0 +1,26 @@
+<h1>Form</h1>
+
+<form id="add-form">
+  <label for="product">Product:</label>
+  <textarea id="product-text" name="product" required></textarea>
+
+  <button class="button-add" type="submit"> Add Product</button>
+
+</form>
+
+<h2>Form to delete product by ID</h2>
+
+<form id="delete-form">
+  <label for="productId">ID product to delete:</label>
+  <input type="text" id="productId" name="productId" required />
+
+  <button class="button-delete" type="submit"> Delete Product</button>
+
+</form>
+
+<div id="products-container">
+
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/index.js"></script>
