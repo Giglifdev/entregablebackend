@@ -1,0 +1,28 @@
+.container {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 50px;
+  padding-top: 40px;
+}
+
+.product-card {
+  display: flex;
+  padding: 40px 10px;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.product-card img {
+  text-align: center;
+}
+
+.product-card-body {
+  padding: 10px 20px;
+}
+@media (width <= 400px) {
+  .product-card {
+    flex-direction: column;
+  }
+}

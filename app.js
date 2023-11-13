@@ -1,47 +1,88 @@
+import path from "node:path";
 import express from "express";
 import handlebars from "express-handlebars";
-import { __dirname } from "./utils.js";
 import { Server } from "socket.io";
-import viewsRouter from "./routes/views.router.js";
-import ProductManager from "./managers/ProductManager.js";
-import path from "node:path";
+import { __dirname } from "./utils.js";
+import sessionsRouter from "./routes/sessions.routes.js";
+import productsRouter from "./routes/products.routes.js";
+import cartsRouter from "./routes/carts.routes.js";
+import viewsRouter from "./routes/views.routes.js";
+import mongoose from "mongoose";
+import session from "express-session";
+import MongoStore from "connect-mongo";
 
-const productsFilePath = path.join(__dirname, "views");
-const productManager = new ProductManager(productsFilePath);
+// message manager
+import MessageManager from "./dao/dbManagers/messages.manager.js";
 
 const app = express();
+const PORT = 8080;
 
-/* config for viewsRouter */
+// db
+try {
+  await mongoose.connect(
+    "mongodb+srv://giglifdev:bhiyHRqwRlTOGVt4@cluster9.wznahdc.mongodb.net/ecommerce?retryWrites=true&w=majority"
+  );
+  console.log("Database connected");
+} catch (error) {
+  console.log(error.message);
+}
 
-app.use(express.static(__dirname + "/public"));
+// Engine
+app.engine(".handlebars", handlebars.engine({ extname: ".handlebars" }));
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", ".handlebars");
+
+// Middlewares
+app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.engine("handlebars", handlebars.engine());
-app.set("views", `${__dirname}/views`);
-app.set("view engine", "handlebars");
+app.use(
+  session({
+    store: MongoStore.create({
+      client: mongoose.connection.getClient(),
+      ttl: 3600,
+    }),
+    secret: "Coder55575secret",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+// Routes
+app.use("/api/products", productsRouter);
+app.use("/api/carts", cartsRouter);
+app.use("/api/sessions", sessionsRouter);
 app.use("/", viewsRouter);
 
-const server = app.listen(8080, () => console.log("Listening on port 8080"));
-const io = new Server(server);
-app.set("socket", io);
+app.use((req, res) => {
+  res.status(404).send({ status: "error", message: "404 not found" });
+});
 
-io.on("connection", (socket) => {
-  console.log("new server conected");
+// Sv
+const server = app.listen(PORT, () => {
+  console.log(`Server is ready on http://localhost:${PORT}`);
+});
 
-  socket.on("add-product", async (data) => {
+const socketServer = new Server(server);
+
+socketServer.on("connection", (socket) => {
+  const messagesManager = new MessageManager();
+  console.log("Cliente conectado");
+
+  socket.on("message", async (data) => {
     try {
-      await productManager.addProduct(JSON.parse(data));
-      io.emit("show everything", await productManager.getProducts());
+      const result = await messagesManager.create(data);
+      const messages = await messagesManager.getAll();
+      socketServer.emit("messageLogs", messages);
     } catch (error) {
-      console.error(error);
+      console.error({ error: error.message });
     }
   });
 
-  socket.on("delete-product", async (data) => {
-    try {
-      const id = Number(data);
-      await productManager.deleteProduct(id);
-      io.emit("show everything", await productManager.getProducts());
-    } catch {}
+  socket.on("authenticated", async (data) => {
+    const messages = await messagesManager.getAll();
+    socket.emit("messageLogs", messages);
+    socket.broadcast.emit("newUserConnected", data);
   });
 });
+
+app.set("socketio", socketServer);

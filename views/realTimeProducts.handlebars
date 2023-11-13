@@ -1,26 +1,55 @@
-<h1>Form</h1>
-
-<form id="add-form">
-  <label for="product">Product:</label>
-  <textarea id="product-text" name="product" required></textarea>
-
-  <button class="button-add" type="submit"> Add Product</button>
-
-</form>
-
-<h2>Form to delete product by ID</h2>
-
-<form id="delete-form">
-  <label for="productId">ID product to delete:</label>
-  <input type="text" id="productId" name="productId" required />
-
-  <button class="button-delete" type="submit"> Delete Product</button>
-
-</form>
-
-<div id="products-container">
-
+<div style="display: flex; flex-direction: column;">
+  <div
+    style="display: flex; flex-direction:column; justify-content:center; align-items:center"
+  >
+    <h3 style="font-size: 2.5rem;">Product entry form</h3>
+    <form
+      action="/api/products/"
+      id="product-form"
+      style="display: flex; flex-direction: column; gap: 10px; width: 50%; padding-bottom: 1.5rem"
+    >
+      <label for="">Title</label>
+      <input type="text" name="title" id="title" />
+      <label for="">Description</label>
+      <input type="text" name="description" id="description" />
+      <label for="">Code</label>
+      <input type="text" name="code" id="code" />
+      <label for="category">Category</label>
+      <input type="text" name="category" id="category" />
+      <label for="">Price</label>
+      <input type="number" name="price" id="price" />
+      <label for="">Stock</label>
+      <input type="number" name="stock" id="stock" />
+      <div style="text-align: center;">
+        <button type="submit" style="padding: 5px 10px">Send</button>
+      </div>
+    </form>
+  </div>
+  <h1 style="text-align: center;">Products in real time</h1>
+  <div
+    id="container"
+    style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) ; gap:20px; padding: 2rem 5rem;"
+  >
+    {{#each products}}
+      <section style="padding: 1.5rem">
+        <div
+          style="display: flex; flex-direction: column; gap: 10px; padding-bottom:0.8rem"
+        >
+          <h3 style="margin-bottom: 0;">title: {{this.title}}</h3>
+          <p style="margin: 0;">code: {{this.code}}</p>
+          <p style="margin: 0;">description: {{this.description}}</p>
+          <span style="margin: 0;">price: ${{this.price}}</span>
+          <p style="margin: 0;">status: {{this.status}}</p>
+          <span style="margin: 0;">stock: {{this.stock}}</span>
+        </div>
+        <button
+          class="delete-button"
+          id={{this.id}}
+          style="background-color: red; padding:5px 10px; border-radius:25px; cursor:pointer; font-weight:bold"
+        >Eliminar</button>
+      </section>
+    {{/each}}
+  </div>
 </div>
-
 <script src="/socket.io/socket.io.js"></script>
-<script src="/index.js"></script>
+<script src="/js/index.js"></script>

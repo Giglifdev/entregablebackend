@@ -1,0 +1,77 @@
+<div style="display: flex; flex-direction: column;">
+  <div
+    style="display: flex; flex-direction:column; justify-content:center; align-items:center"
+  >
+    <div>
+      <h2>Welcome {{user.name}} (<span>rol: {{user.role}}</span>)</h2>
+
+    </div>
+    <h3 style="font-size: 2.5rem;">Product entry form</h3>
+    <a
+      href="/api/sessions/logout"
+      style="position: absolute; right: 10px; top: 10px"
+    ><button>Exit</button></a>
+    <a href="/" style="position: absolute; left: 10px; top: 10px"><button
+      >Profile</button></a>
+    <form
+      action="/api/products/"
+      id="product-form"
+      style="display: flex; flex-direction: column; gap: 10px; width: 50%; padding-bottom: 1.5rem"
+    >
+      <label for="">Title</label>
+      <input type="text" name="title" id="title" />
+      <label for="">Description</label>
+      <input type="text" name="description" id="description" />
+      <label for="">Code</label>
+      <input type="text" name="code" id="code" />
+      <label for="category">Category</label>
+      <input type="text" name="category" id="category" />
+      <label for="price">Price</label>
+      <input type="number" name="price" id="price" />
+      <label for="stock">Stock</label>
+      <input type="number" name="stock" id="stock" />
+      <div style="text-align: center;">
+        <button type="submit" style="padding: 5px 10px">Send</button>
+      </div>
+    </form>
+  </div>
+  <h1 style="text-align: center;">Products in real time</h1>
+  <div
+    id="container"
+    style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap:20px; padding: 2rem 5rem;"
+  >
+    {{#each products}}
+      <section style="padding: 1.5rem;" id={{this.id}}>
+        <div
+          style="display: flex; flex-direction: column; gap: 25px; padding-bottom:0.8rem; height: 15rem; margin-bottom: 5px"
+        >
+          <h3 style="margin-bottom: 0;">{{this.title}}</h3>
+          <p style="margin: 0;">Code: {{this.code}}</p>
+          <p style="margin: 0;">Description: {{this.description}}</p>
+          <a href="/products/{{this._id}}" class="detalle-link">Detail</a>
+        </div>
+        <button class="delete-button">Delete</button>
+        <button class="add-button">Add to Cart</button>
+      </section>
+    {{/each}}
+
+  </div>
+  <div
+    class="paginator"
+    id="paginator"
+    style="text-align: center; padding: 30px 25px; "
+  >
+    {{#if hasPrevPage}}
+      <a href={{prevLink}}><button class="page-button">Back</button></a>
+    {{else}}
+      <a><button class="page-button" disabled>Back</button></a>
+    {{/if}}
+    {{#if hasNextPage}}
+      <a href={{nextLink}}><button class="page-button">Next</button></a>
+    {{else}}
+      <a><button class="page-button" disabled>Next</button></a>
+    {{/if}}
+  </div>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/products.js"></script>

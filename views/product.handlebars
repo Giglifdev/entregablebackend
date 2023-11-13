@@ -1,0 +1,28 @@
+<a
+  href="/api/sessions/logout"
+  style="position: absolute; right: 10px; top: 10px"
+><button>Exit</button></a>
+<div style="position: absolute; left: 10px; top: 10px">
+  <a href="/"><button>Profile</button></a>
+  <a href="/products"><button>Products</button></a>
+</div>
+<div class="container">
+  <h1>Product </h1>
+  <div class="product-card">
+    <img src="" alt="Imagen referencial del producto" />
+    <div class="product-card-body" id={{product._id}}>
+      <p style="font-weight: bold;">{{product.title}}</p>
+      <p>{{product.description}}</p>
+      <p><span style="font-weight: bold;">Category:
+        </span>{{product.category}}</p>
+      <p><span style="font-weight: bold;">Price: $</span>{{product.price}}</p>
+      <p><span style="font-weight: bold;">Stock: </span>{{product.stock}}</p>
+      <button
+        id="add-button"
+        style="background-color: rgb(0, 150, 37); padding:5px 10px; border-radius:25px; cursor:pointer; font-weight:bold"
+      >Add to Cart</button>
+    </div>
+  </div>
+</div>
+
+<script src="/js/product.js"></script>

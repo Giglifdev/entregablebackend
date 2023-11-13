@@ -1,0 +1,104 @@
+[
+  {
+    "id": 1,
+    "code": "product-1",
+    "title": "t-shirt",
+    "description": "t-shirt luxury blank heavy cotton custom streetwear oversized",
+    "price": 20,
+    "thumbnail": [],
+    "stock": 10,
+    "status": true
+  },
+  {
+    "id": 2,
+    "code": "product-2",
+    "title": "t-shirt",
+    "description": "t-shirt luxury blank heavy cotton custom streetwear oversized",
+    "price": 35,
+    "thumbnail": [],
+    "stock": 20,
+    "status": true
+  },
+
+  {
+    "id": 3,
+    "code": "product-3",
+    "title": "t-shirt",
+    "description": "t-shirt luxury blank heavy cotton custom streetwear oversized",
+    "price": 40,
+    "thumbnail": [],
+    "stock": 35,
+    "status": true
+  },
+  {
+    "id": 4,
+    "code": "product-4",
+    "title": "t-shirt",
+    "description": "t-shirt luxury blank heavy cotton custom streetwear oversized",
+    "price": 45,
+    "thumbnail": [],
+    "stock": 40,
+    "status": true
+  },
+
+  {
+    "id": 5,
+    "code": "product-5",
+    "title": "t-shirt",
+    "description": "t-shirt luxury blank heavy cotton custom streetwear oversized",
+    "price": 50,
+    "thumbnail": [],
+    "stock": 50,
+    "status": true
+  },
+  {
+    "id": 6,
+    "code": "product-6",
+    "title": "t-shirt",
+    "description": "t-shirt luxury blank heavy cotton custom streetwear oversized",
+    "price": 55,
+    "thumbnail": [],
+    "stock": 55,
+    "status": true
+  },
+  {
+    "id": 7,
+    "code": "product-7",
+    "title": "t-shirt",
+    "description": "t-shirt luxury blank heavy cotton custom streetwear oversized",
+    "price": 60,
+    "thumbnail": [],
+    "stock": 60,
+    "status": true
+  },
+  {
+    "id": 8,
+    "code": "product-8",
+    "title": "t-shirt",
+    "description": "t-shirt luxury blank heavy cotton custom streetwear oversized",
+    "price": 65,
+    "thumbnail": [],
+    "stock": 65,
+    "status": true
+  },
+  {
+    "id": 9,
+    "code": "product-9",
+    "title": "t-shirt",
+    "description": "t-shirt luxury blank heavy cotton custom streetwear oversized",
+    "price": 70,
+    "thumbnail": [],
+    "stock": 70,
+    "status": true
+  },
+  {
+    "id": 10,
+    "code": "product-10",
+    "title": "t-shirt",
+    "description": "t-shirt luxury blank heavy cotton custom streetwear oversized",
+    "price": 75,
+    "thumbnail": [],
+    "stock": 75,
+    "status": true
+  }
+]

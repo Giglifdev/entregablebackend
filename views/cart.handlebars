@@ -1,0 +1,38 @@
+<div class="container">
+  <h1>Carrito de compras</h1>
+  <a
+    href="/api/sessions/logout"
+    style="position: absolute; left: 10px; top: 10px"
+  ><button>Salir</button></a>
+  <div id="container-table">
+    <table id="customers">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Code</th>
+          <th>Stock</th>
+          <th>Price</th>
+          <th>Category</th>
+          <th>Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each products}}
+          <tr>
+            <td class="numberId"></td>
+            <td>{{this.product.title}}</td>
+            <td>{{this.product.description}}</td>
+            <td>{{this.product.code}}</td>
+            <td>{{this.product.stock}}</td>
+            <td>{{this.product.price}}</td>
+            <td>{{this.product.category}}</td>
+            <td>{{this.quantity}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>
+<script src="/js/cart.js"></script>

@@ -1,13 +1,13 @@
-<p>this is a product</p>
-
 <div>
-  {{#each stuffs}}
-    <ul>
-      <li>{{this.title}}</li>
-      <li>{{this.price}}</li>
-      <li>{{this.id}}</li>
-
-    </ul>
-  {{/each}}
-
+  <h1>Products View</h1>
+  <div>
+    {{#each products}}
+      <section>
+        <h3>{{this.title}}</h3>
+        <span>{{this.code}}</span>
+        <p>{{this.description}}</p>
+        <p><span>$</span>{{this.price}}</p>
+      </section>
+    {{/each}}
+  </div>
 </div>
