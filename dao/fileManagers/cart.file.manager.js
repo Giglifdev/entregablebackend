@@ -1,30 +1,13 @@
 import fs from "node:fs";
 import { productsFilePath } from "../../utils.js";
 import ProductManager from "./product-file.manager.js";
-/*
-CARTS:
-[
-  {
-    id: 1,
-    products: [
-      {
-        id:1,
-        quantity: 2
-      },
-      {
-        id:2,
-        quantity: 3
-      }
-    ]
-  }
-]
-*/
+
 export default class CartManager {
   constructor(path) {
     this.path = path;
   }
 
-  // GET ALL
+  // get all
   getAll = async () => {
     try {
       if (fs.existsSync(this.path)) {
@@ -42,7 +25,7 @@ export default class CartManager {
     }
   };
 
-  // GET BY ID
+  // id
   getById = async (id) => {
     try {
       const carts = await this.getCarts();
@@ -62,7 +45,7 @@ export default class CartManager {
     }
   };
 
-  // ADD
+  // add
   create = async () => {
     try {
       const cart = {};

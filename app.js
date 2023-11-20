@@ -11,16 +11,18 @@ import mongoose from "mongoose";
 import session from "express-session";
 import MongoStore from "connect-mongo";
 
-// message manager
+// Manager
 import MessageManager from "./dao/dbManagers/messages.manager.js";
+import { initializePassport } from "./config/passport.config.js";
+import passport from "passport";
 
 const app = express();
 const PORT = 8080;
 
-// db
+// Db
 try {
   await mongoose.connect(
-    "mongodb+srv://giglifdev:bhiyHRqwRlTOGVt4@cluster9.wznahdc.mongodb.net/ecommerce?retryWrites=true&w=majority"
+    "mongodb+srv://lucianoferrando94:RxBWSWiQeU9Ic0Xy@cluster55575.ixldvmd.mongodb.net/ecommerce?retryWrites=true&w=majority"
   );
   console.log("Database connected");
 } catch (error) {
@@ -28,9 +30,9 @@ try {
 }
 
 // Engine
-app.engine(".handlebars", handlebars.engine({ extname: ".handlebars" }));
+app.engine(".hbs", handlebars.engine({ extname: ".hbs" }));
 app.set("views", path.join(__dirname, "views"));
-app.set("view engine", ".handlebars");
+app.set("view engine", ".hbs");
 
 // Middlewares
 app.use(express.static(path.join(__dirname, "public")));
@@ -47,6 +49,12 @@ app.use(
     saveUninitialized: true,
   })
 );
+
+// Passport
+initializePassport();
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Routes
 app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
@@ -57,7 +65,7 @@ app.use((req, res) => {
   res.status(404).send({ status: "error", message: "404 not found" });
 });
 
-// Sv
+// Server
 const server = app.listen(PORT, () => {
   console.log(`Server is ready on http://localhost:${PORT}`);
 });
