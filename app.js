@@ -22,7 +22,7 @@ const PORT = 8080;
 // Db
 try {
   await mongoose.connect(
-    "mongodb+srv://lucianoferrando94:RxBWSWiQeU9Ic0Xy@cluster55575.ixldvmd.mongodb.net/ecommerce?retryWrites=true&w=majority"
+    "mongodb+srv://giglifdev:2E8pBTbYIzQkj3bJ@cluster9.wznahdc.mongodb.net/ecommerce?retryWrites=true&w=majority"
   );
   console.log("Database connected");
 } catch (error) {
